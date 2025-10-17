@@ -1,0 +1,15 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  host: localhost
+  username: postgres
+  password: admin
+  pool: 5
+
+development:
+  <<: *default
+  database: pokedex_development
+
+test:
+  <<: *default
+  database: pokedex_test
