@@ -1,6 +1,10 @@
 class CreatePokemons < ActiveRecord::Migration[8.0]
-  def change
-    create_table :pokemons do |t|
+  TABLE_NAME = 'pokemons'
+
+  def up
+    return if ActiveRecord::Base.connection.table_exists?(TABLE_NAME)
+
+    create_table TABLE_NAME do |t|
       t.integer :poke_index
       t.string :name, null: false
       t.string :type_1
@@ -17,5 +21,10 @@ class CreatePokemons < ActiveRecord::Migration[8.0]
 
       t.timestamps
     end
+  end
+
+  def down
+    return unless ActiveRecord::Base.connection.table_exists?(TABLE_NAME)
+    drop_table TABLE_NAME
   end
 end
