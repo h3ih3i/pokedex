@@ -12,10 +12,7 @@ class PokemonsController < ApplicationController
       @pokemons = Pokemon.all.order(:poke_index)
     end
 
-    respond_to do |format|
-      format.html
-      format.json { @pokemons }
-    end
+    render json: @pokemons
   end
 
   # GET /pokemons/1
