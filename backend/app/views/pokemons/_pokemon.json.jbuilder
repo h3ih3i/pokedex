@@ -1,6 +1,7 @@
 json.extract! pokemon, :id, :name, :poke_index, :generation, :legendary
 json.total pokemon.calculate_total
 json.type [pokemon.type_1, pokemon.type_2].compact
+json.image_url url_for(pokemon.image) if pokemon.image.attached?
 json.stats do
   json.hp pokemon.hp
   json.attack pokemon.attack

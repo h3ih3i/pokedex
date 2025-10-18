@@ -38,15 +38,13 @@ Pokemon.transaction do
 
 			pok.image.attach(
 				io: File.open(image_path),
-				filename: row['Name'],
+				filename: "#{row['Name']}.jpg",
 				content_type: "image/jpg"
 			)
 
 			count += 1
 			puts "#{count} - #{pok.name}"
 		end
-
-
 	end
 end
 
