@@ -1,9 +1,16 @@
 class PokemonsController < ApplicationController
-  before_action :set_pokemon, only: %i[ show update destroy ]
+  # skip authenticity for testing purpose
+  # skip_before_action :verify_authenticity_token
+
+  before_action :set_pokemon, only: [:show, :update, :destroy]
 
   # GET /pokemons
   def index
-    @pokemons = Pokemon.all
+    if params[:name]
+      @pokemons = Pokemon.where('lower(name) = ?', params[:name].downcase)
+    else
+      @pokemons = Pokemon.all.order(:poke_index)
+    end
 
     render json: @pokemons
   end
@@ -18,9 +25,9 @@ class PokemonsController < ApplicationController
     @pokemon = Pokemon.new(pokemon_params)
 
     if @pokemon.save
-      render json: @pokemon, status: :created, location: @pokemon
+      render json: @pokemon, status: :created
     else
-      render json: @pokemon.errors, status: :unprocessable_content
+      render json: @pokemon.errors, status: :unprocessable_entity
     end
   end
 
@@ -29,23 +36,37 @@ class PokemonsController < ApplicationController
     if @pokemon.update(pokemon_params)
       render json: @pokemon
     else
-      render json: @pokemon.errors, status: :unprocessable_content
+      render json: @pokemon.errors, status: :unprocessable_entity
     end
   end
 
   # DELETE /pokemons/1
   def destroy
-    @pokemon.destroy!
+    @pokemon.destroy
   end
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_pokemon
-      @pokemon = Pokemon.find(params.expect(:id))
-    end
 
-    # Only allow a list of trusted parameters through.
-    def pokemon_params
-      params.fetch(:pokemon, {})
-    end
+  private
+  def set_pokemon
+    @pokemon = Pokemon.find(params[:id])
+  end
+
+  def pokemon_params
+    params.permit(
+      :poke_index,
+      :name,
+      :type_1,
+      :type_2,
+      :total,
+      :hp,
+      :attack,
+      :defense,
+      :speed_attack,
+      :speed_defense,
+      :speed,
+      :generation,
+      :legendary,
+      :image
+    )
+  end
 end
