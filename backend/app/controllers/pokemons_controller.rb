@@ -12,12 +12,12 @@ class PokemonsController < ApplicationController
       @pokemons = Pokemon.all.order(:poke_index)
     end
 
-    render json: @pokemons
+    render :index
   end
 
   # GET /pokemons/1
   def show
-    render json: @pokemon
+    render :show
   end
 
   # POST /pokemons
