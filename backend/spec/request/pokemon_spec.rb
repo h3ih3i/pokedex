@@ -2,11 +2,16 @@ require 'rails_helper'
 
 RSpec.describe "Pokemon", type: :request do
   describe "GET" do
+    let(:p1) { Pokemon.create(name: 'Sword', poke_index: 6000) }
+    let(:p2) { Pokemon.create(name: 'Sword2', poke_index: 6000) }
+    let(:p3) { Pokemon.create(name: 'Sword3', poke_index: 6000) }
+
     before :each do
-      Pokemon.create(name: 'Sword', poke_index: 6000)
-      Pokemon.create(name: 'Sword2', poke_index: 6000)
-      Pokemon.create(name: 'Sword3', poke_index: 6000)
+      p1.image.attach(io: StringIO.new("fake image content"), filename: "test.jpg", content_type: "image/jpg")
+      p2.image.attach(io: StringIO.new("fake image content"), filename: "test.jpg", content_type: "image/jpg")
+      p3.image.attach(io: StringIO.new("fake image content"), filename: "test.jpg", content_type: "image/jpg")
     end
+
     it 'get all pokemons' do
       get pokemons_path(format: :json)
 
