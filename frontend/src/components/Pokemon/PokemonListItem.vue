@@ -5,6 +5,7 @@
 </template>
 
 <script>
+
 export default {
   name: 'PokemonListItem',
 
@@ -17,8 +18,7 @@ export default {
 
   methods: {
     openModal() {
-      // Logic to open modal goes here
-      alert(`Open modal for ${this.pokemon.name}`);
+      this.$emit('open-modal', this.pokemon);
     }
   },
 
@@ -35,5 +35,9 @@ export default {
 .pokemon-list-item img:hover {
   transform: scale(1.5);
   cursor: pointer
+}
+
+.pokemon-list-item {
+  flex: 0 0 calc(10% - 12px);
 }
 </style>

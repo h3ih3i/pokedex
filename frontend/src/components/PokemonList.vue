@@ -3,29 +3,38 @@
     <h1>Pokédex</h1>
       <div class="pokemon-list">
         <PokemonListItem
-        v-for="pokemon in pokemons"
-        :key="pokemon.id"
-        :pokemon="pokemon"
-        class="pokemon-item"
-      />
+          v-for="pokemon in pokemons"
+          :key="pokemon.id"
+          :pokemon="pokemon"
+          @open-modal="openModal"
+        />
       </div>
+
+      <PokemonModal
+        v-if="selectedPokemon"
+        :pokemon="selectedPokemon"
+        @close="closeModal"
+      />
   </div>
 </template>
 
 <script>
 import PokemonService from '@/services/PokemonService.js'
 import PokemonListItem from '@/components/Pokemon/PokemonListItem.vue'
+import PokemonModal from './Pokemon/PokemonModal.vue';
 
 export default {
   name: 'PokemonList',
 
   components: {
-    PokemonListItem
+    PokemonListItem,
+    PokemonModal
   },
 
   data() {
     return {
       pokemons: [],
+      selectedPokemon: null
     }
   },
 
@@ -34,6 +43,16 @@ export default {
       this.pokemons = response.data
     })
   },
+
+  methods: {
+    openModal(pokemon) {
+      this.selectedPokemon = pokemon;
+    },
+
+    closeModal() {
+      this.selectedPokemon = null;
+    }
+  }
 }
 </script>
 
@@ -56,9 +75,5 @@ export default {
   flex-wrap: wrap;
   justify-content: center;
   gap: 12px;
-}
-
-.pokemon-item {
-  flex: 0 0 calc(10% - 12px);
 }
 </style>
