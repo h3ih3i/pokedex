@@ -1,6 +1,7 @@
 <template>
   <div class="pokemon-container">
     <h1>Pokédex</h1>
+    <button class="add-new-pokemon" @click="addPokemon">add New Pokemon</button>
       <div class="pokemon-list">
         <PokemonListItem
           v-for="pokemon in pokemons"
@@ -15,6 +16,11 @@
         :pokemon="selectedPokemon"
         @close="closeModal"
       />
+
+      <NewPokemonModal
+        v-if="addingPokemon"
+        @close="doneAddingPokemon"
+      />
   </div>
 </template>
 
@@ -22,19 +28,22 @@
 import PokemonService from '@/services/PokemonService.js'
 import PokemonListItem from '@/components/Pokemon/PokemonListItem.vue'
 import PokemonModal from './Pokemon/PokemonModal.vue';
+import NewPokemonModal from './Pokemon/newPokemonModal.vue';
 
 export default {
   name: 'PokemonList',
 
   components: {
     PokemonListItem,
-    PokemonModal
+    PokemonModal,
+    NewPokemonModal
   },
 
   data() {
     return {
       pokemons: [],
-      selectedPokemon: null
+      selectedPokemon: null,
+      addingPokemon: false
     }
   },
 
@@ -51,6 +60,14 @@ export default {
 
     closeModal() {
       this.selectedPokemon = null;
+    },
+
+    addPokemon() {
+      this.addingPokemon = true;
+    },
+
+    doneAddingPokemon() {
+      this.addingPokemon = false;
     }
   }
 }
@@ -75,5 +92,15 @@ export default {
   flex-wrap: wrap;
   justify-content: center;
   gap: 12px;
+}
+
+.add-new-pokemon {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 20px;
 }
 </style>

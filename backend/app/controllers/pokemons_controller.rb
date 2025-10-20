@@ -24,6 +24,10 @@ class PokemonsController < ApplicationController
   def create
     @pokemon = Pokemon.new(pokemon_params)
 
+    if params[:pokemon][:image].present?
+      @pokemon.image.attach(params[:pokemon][:image])
+    end
+
     if @pokemon.save
       render json: @pokemon, status: :created
     else
@@ -52,8 +56,7 @@ class PokemonsController < ApplicationController
   end
 
   def pokemon_params
-    params.permit(
-      :poke_index,
+    params.require(:pokemon).permit(
       :name,
       :type_1,
       :type_2,
@@ -65,8 +68,7 @@ class PokemonsController < ApplicationController
       :speed_defense,
       :speed,
       :generation,
-      :legendary,
-      :image
+      :legendary
     )
   end
 end
