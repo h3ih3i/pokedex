@@ -7,39 +7,39 @@
         <form @submit.prevent="submitForm">
           <div class="form-group">
             <label for="name">Name</label>
-            <input v-model="pokemonData.name" id="name" type="text" required />
+            <input v-model="pokemonData.name" type="text" required />
           </div>
           <div class="form-group">
             <label for="name">Type 1</label>
-            <input v-model="pokemonData.type_1" id="name" type="text" required />
+            <input v-model="pokemonData.type_1" type="text" required />
           </div>
           <div class="form-group">
             <label for="name">Type 2</label>
-            <input v-model="pokemonData.type_2" id="name" type="text" />
+            <input v-model="pokemonData.type_2" type="text" />
           </div>
           <div class="form-group">
             <label for="name">hp</label>
-            <input v-model="pokemonData.hp" id="name" type="number" required />
+            <input v-model="pokemonData.hp" type="number" required />
           </div>
           <div class="form-group">
             <label for="name">Attack</label>
-            <input v-model="pokemonData.attack" id="name" type="number" required />
+            <input v-model="pokemonData.attack" type="number" required />
           </div>
           <div class="form-group">
             <label for="name">Defence</label>
-            <input v-model="pokemonData.defense" id="name" type="number" required />
+            <input v-model="pokemonData.defense" type="number" required />
           </div>
           <div class="form-group">
             <label for="name">Speed</label>
-            <input v-model="pokemonData.speed" id="name" type="number" required />
+            <input v-model="pokemonData.speed" type="number" required />
           </div>
           <div class="form-group">
             <label for="name">Speed Attack</label>
-            <input v-model="pokemonData.speed_attack" id="name" type="number" required />
+            <input v-model="pokemonData.speed_attack" type="number" required />
           </div>
           <div class="form-group">
             <label for="name">Speed Defence</label>
-            <input v-model="pokemonData.speed_defense" id="name" type="number" required />
+            <input v-model="pokemonData.speed_defense" type="number" required />
           </div>
           <div class="form-group">
             <label for="name">Generation</label>
