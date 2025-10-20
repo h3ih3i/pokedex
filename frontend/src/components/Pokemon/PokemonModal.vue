@@ -29,7 +29,6 @@ export default {
       required: true,
     },
   },
-  emits: ["close"],
 
   methods: {
     close() {
