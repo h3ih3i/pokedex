@@ -2,14 +2,14 @@ pipeline {
 	agent any
 
 	stages {
-		stage('Build') {
+		stage('Build Backend') {
 			steps {
-				echo 'Building...'
+				sh 'cd backend && bundle exec install'
 			}
 		}
 		stage('Test') {
 			steps {
-				echo 'Testing...'
+				sh 'cd backend && bundle exec rspec'
 			}
 		}
 	}
